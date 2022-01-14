@@ -22,8 +22,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print("here")
 
     regex: re.Pattern = re.compile(
-        r""":\s+(?:(?:""" + values + r""")(?:['"]|\s|$)|(?:['"](?:""" + values + r""")(?:[^\w'"]|$)))""",
-        flags
+        r""":\s+(?:(?:"""
+        + values
+        + r""")(?:['"]|\s|$)|(?:['"](?:"""
+        + values
+        + r""")(?:[^\w'"]|$)))""",
+        flags,
     )
 
     retval: int = 0
@@ -35,7 +39,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     idx += 1
                     match: re.Match = regex.search(line)
                     if match:
-                        print(f"{filename}: Restricted value found on line {idx} at column {match.span(0)[0]} {match.group(0).rstrip()}")
+                        print(
+                            f"{filename}: Restricted value found on line {idx} at column {match.span(0)[0]} {match.group(0).rstrip()}"
+                        )
                         retval = 1
         except OSError as exc:
             print(exc)
