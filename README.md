@@ -9,13 +9,23 @@ See also: <https://github.com/pre-commit/pre-commit>
 Add this to your `.pre-commit-config.yaml`
 
 ```yaml
--   repo: https://github.com/eitrtechnologies/pre-commit-yamlpolicy
-    rev: v1.0.0  # Use the ref you want to point to
-    hooks:
-    -   id: disallowunquoted
+repos:
+- repo: https://github.com/eitrtechnologies/pre-commit-yamlpolicy
+  rev: v1.1.0  # Use the ref you want to point to
+  hooks:
+    - id: bannedk8skinds
+    - id: disallowunquoted
 ```
 
 ### Hooks Available
+
+#### `bannedk8skinds`
+Deny commits of certain Kubernetes object types.
+  - `--allow-multiple-documents` - allow yaml files which use the
+    [multi-document syntax](http://www.yaml.org/spec/1.2/spec.html#YAML)
+  - `--kinds` - Specify a comma-separated list of
+    [Kubernetes object types](https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds)
+    which will be denied in a commit to the repo. Defaults to `Secret`
 
 #### `disallowunquoted`
 Deny commits where certain YAML values are found but not quoted.

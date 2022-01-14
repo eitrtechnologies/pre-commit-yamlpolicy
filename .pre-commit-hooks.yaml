@@ -1,5 +1,13 @@
 ---
 
+- id: bannedk8skinds
+  name: bannedk8skinds
+  description: Disallows commit of Kubernetes YAML files containing specific kinds.
+  entry: bannedk8skinds
+  language: python
+  always_run: True
+  types:
+    - yaml
 - id: disallowunquoted
   name: disallowunquoted
   description: Disallows the use of certain YAML values unless quoted.
