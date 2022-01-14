@@ -1,0 +1,10 @@
+---
+
+- id: disallowunquoted
+  name: disallowunquoted
+  description: Disallows the use of certain YAML values unless quoted.
+  entry: disallowunquoted
+  language: python
+  always_run: True
+  types:
+    - yaml
