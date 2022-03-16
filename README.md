@@ -16,8 +16,7 @@ repos:
     - id: bannedk8skinds
     - id: disallowunquoted
     - id: valueregex
-      jmespath: '*.matchers[].match'
-      regex: '\([^ ]|[^ ]\)'
+      args: [--jmespath, '*.matchers[].match', --regex, '\([^ ]|[^ ]\)']
 ```
 
 ### Hooks Available
