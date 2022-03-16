@@ -16,3 +16,11 @@
   always_run: True
   types:
     - yaml
+- id: valueregex
+  name: valueregex
+  description: Disallows the use of certain YAML values based on a regex.
+  entry: valueregex
+  language: python
+  always_run: False
+  types:
+    - yaml
