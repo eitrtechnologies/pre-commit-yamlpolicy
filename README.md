@@ -11,12 +11,18 @@ Add this to your `.pre-commit-config.yaml`
 ```yaml
 repos:
 - repo: https://github.com/eitrtechnologies/pre-commit-yamlpolicy
-  rev: v1.2.0  # Use the ref you want to point to
+  rev: v1.3.0  # Use the ref you want to point to
   hooks:
     - id: bannedk8skinds
     - id: disallowunquoted
     - id: valueregex
-      args: [--jmespath, '*.matchers[].match', --regex, '\([^ ]|[^ ]\)']
+      args:
+        - --jmespath
+        - '*.matchers[].match'
+        - --regex
+        - '\([^ ]|[^ ]\)'
+        - --error-message
+        - Found parentheses too close together. Can haz fix plz?
 ```
 
 ### Hooks Available
@@ -44,5 +50,7 @@ values in YAML.
     the values to run a regex against. *REQUIRED*
   - `--regex` - Regex which will cause the hook to fail if it matches any of the
     values returned by the JMESPath query. *REQUIRED*
+  - `--error-message` - Message to display when a match is found. This allows
+    a more user-friendly message to be displayed for a given regex match.
   - `--allow-multiple-documents` - Allow YAML files which use the
     [multi-document syntax](http://www.yaml.org/spec/1.2/spec.html#YAML)

@@ -35,6 +35,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "--jmespath",
         required=True,
     )
+    optional.add_argument(
+        "-e",
+        "--error-message",
+    )
     required.add_argument("filenames", nargs="*", help="Filenames to check.")
     args: argparse.Namespace = parser.parse_args(argv)
 
@@ -43,6 +47,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     retval: int = 0
     for filename in args.filenames:
+        error_message: str = f'Restricted value found for JMESPath "{search}"'
+        if args.error_message:
+            error_message = args.error_message
+
         try:
             with open(filename, encoding="UTF-8") as f:
                 if args.multi:
@@ -54,7 +62,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                         match: re.Match = regex.search(val)
                         if match:
                             print(
-                                f'{filename}: Restricted value found for JMESPath "{search}" =  {match.group(0).rstrip()}'
+                                f"{filename}: {error_message} =  {match.group(0).rstrip()}"
                             )
                             retval = 1
         except ruamel.yaml.YAMLError as exc:
